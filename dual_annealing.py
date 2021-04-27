@@ -53,7 +53,7 @@ class VisitingDistribution(object):
         # have to be dynamically calculated in `visit_fn`. They're factored
         # out here so they don't need to be recalculated all the time.
         self._visiting_param = visiting_param
-        self.rand_state = rand_state 
+        self.rand_state = rand_state #pq no tomar un array de distribucion conidicional
         self.lower = lb
         self.upper = ub
         self.bound_range = ub - lb
@@ -198,11 +198,11 @@ class EnergyState(object):
                 self.xbest = np.copy(self.current_location)
             # Otherwise, we keep them in case of reannealing reset
 
-    def update_best(self, e, x, context):
+    def update_best(self, e, x, context, iteration=0):
         self.ebest = e
         self.xbest = np.copy(x)
         if self.callback is not None:
-            val = self.callback(x, e, context)
+            val = self.callback(x, e, context,iteration)
             if val is not None:
                 if val:
                     return('Callback function requested to stop early by '
@@ -279,7 +279,7 @@ class StrategyChain(object):
                 self.emin = self.energy_state.current_energy
                 self.xmin = np.copy(self.energy_state.current_location)
 
-    def run(self, step, temperature):
+    def run(self, step, temperature, iteration):
         self.temperature_step = temperature / float(step + 1)
         self.not_improved_idx += 1
         for j in range(self.energy_state.current_location.size * 2):
@@ -297,7 +297,7 @@ class StrategyChain(object):
                 # We have got a better energy value
                 self.energy_state.update_current(e, x_visit)
                 if e < self.energy_state.ebest:
-                    val = self.energy_state.update_best(e, x_visit, 0)
+                    val = self.energy_state.update_best(e, x_visit, 0, iteration=iteration)
                     if val is not None:
                         if val:
                             return val
@@ -666,7 +666,7 @@ def dual_annealing(func, bounds, args=(), maxiter=1000,
                 energy_state.reset(func_wrapper, rand_state)
                 break
             # starting strategy chain
-            val = strategy_chain.run(i, temperature)
+            val = strategy_chain.run(i, temperature, iteration)
             if val is not None:
                 message.append(val)
                 need_to_stop = True
