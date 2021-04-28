@@ -1,0 +1,251 @@
+----------------------------------------------------------------------------------
+Dual_Anneling parameters:                                                
+----------------------------------------------------------------------------------
+Objective Function: Peaks, Ackley, Rastrigin and Rosenbrok Functions
+Bounds for the variables of the Ackley function = (-5, 5)
+Bounds for the variables of the Rastrigin and Rosenbrok function = (-5.12, 5.12)
+Maximum number of global search iterations  = 2000
+Initial temperature of the Peaks, Ackley and Rastrigin function  = 25
+Initial temperature of the Rosenbrok function = 10000
+Restart temperature ratio= 2e-07
+Parameter for visiting distribution = 2.7
+Parameter for acceptance distribution = -5
+No local search = True
+Minimization halted value = 1e-16
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+Dual_Annealing result:                                                    
+----------------------------------------------------------------------------------
+Result for the  Ackley function
+      fun: 0.0
+ message: ['Callback function requested to stop early by returning True']
+    nfev: 5864
+    nhev: 0
+     nit: 1465
+    njev: 0
+  status: 0
+ success: False
+       x: array([0., 0.])
+----------------------------------------------------------------------------------
+Result for the  Rastrigin function
+      fun: 0.0
+ message: ['Callback function requested to stop early by returning True']
+    nfev: 3780
+    nhev: 0
+     nit: 944
+    njev: 0
+  status: 0
+ success: False
+       x: array([-3.47163454e-09, -6.29657215e-10])
+----------------------------------------------------------------------------------
+Result for the  Rosenbrok function
+      fun: 0.017123336436443436
+ message: ['Maximum number of iteration reached']
+    nfev: 8001
+    nhev: 0
+     nit: 2000
+    njev: 0
+  status: 0
+ success: True
+       x: array([1.13072531, 1.27912479])
+----------------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Descriptive statistics                                                   
+-------------------------------------------------------------------------
+Ackley Function                                                          
+-------------------------------------------------------------------------
+Error
+                           0
+N               5.000000e+01
+Min             0.000000e+00
+Max             2.524355e-29
+Range           2.524355e-29
+Mean            1.072851e-30
+Median          0.000000e+00
+Frist quartile  0.000000e+00
+Third quartile  0.000000e+00
+IR              0.000000e+00
+Variance        1.338595e-59
+Std             3.658682e-30
+Symmetry        5.779676e+00
+Kurtosis        3.512157e+01
+-------------------------------------------------------------------------
+Function value
+                           0
+N               5.000000e+01
+Min             0.000000e+00
+Max             1.421085e-14
+Range           1.421085e-14
+Mean            9.237056e-16
+Median          0.000000e+00
+Frist quartile  0.000000e+00
+Third quartile  0.000000e+00
+IR              0.000000e+00
+Variance        5.457655e-30
+Std             2.336163e-15
+Symmetry        3.886812e+00
+Kurtosis        1.823707e+01
+-------------------------------------------------------------------------
+Iterations number
+                           0
+N                  50.000000
+Min              1297.000000
+Max              2000.000000
+Range             703.000000
+Mean             1797.400000
+Median           1826.000000
+Frist quartile   1730.500000
+Third quartile   1932.000000
+IR                201.500000
+Variance        29640.160000
+Std               172.163178
+Symmetry           -0.826800
+Kurtosis            0.162339
+-------------------------------------------------------------------------
+Execution time
+                        0
+N               50.000000
+Min              0.591053
+Max              2.158241
+Range            1.567188
+Mean             1.003458
+Median           0.937681
+Frist quartile   0.776421
+Third quartile   1.215146
+IR               0.438725
+Variance         0.090800
+Std              0.301330
+Symmetry         1.250791
+Kurtosis         2.423352
+-------------------------------------------------------------------------
+Rastrigin Function                                                       
+-------------------------------------------------------------------------
+Error
+                           0
+N               5.000000e+01
+Min             1.020659e-18
+Max             9.899427e-01
+Range           9.899427e-01
+Mean            1.979885e-02
+Median          8.109565e-18
+Frist quartile  5.010427e-18
+Third quartile  1.134488e-17
+IR              6.334457e-18
+Variance        1.920774e-02
+Std             1.385920e-01
+Symmetry        6.857143e+00
+Kurtosis        4.502041e+01
+-------------------------------------------------------------------------
+Function value
+                        0
+N               50.000000
+Min              0.000000
+Max              0.994959
+Range            0.994959
+Mean             0.019899
+Median           0.000000
+Frist quartile   0.000000
+Third quartile   0.000000
+IR               0.000000
+Variance         0.019403
+Std              0.139294
+Symmetry         6.857143
+Kurtosis        45.020408
+-------------------------------------------------------------------------
+Iterations number
+                            0
+N                   50.000000
+Min                178.000000
+Max               2000.000000
+Range             1822.000000
+Mean               389.220000
+Median             249.500000
+Frist quartile     223.000000
+Third quartile     341.500000
+IR                 118.500000
+Variance        154999.651600
+Std                393.699951
+Symmetry             3.249240
+Kurtosis             9.856349
+-------------------------------------------------------------------------
+Execution time
+                        0
+N               50.000000
+Min              0.087429
+Max              1.370207
+Range            1.282778
+Mean             0.219103
+Median           0.136414
+Frist quartile   0.116034
+Third quartile   0.211961
+IR               0.095926
+Variance         0.054279
+Std              0.232979
+Symmetry         3.484201
+Kurtosis        12.347015
+-------------------------------------------------------------------------
+Rosenbrok Function                                                       
+-------------------------------------------------------------------------
+Error
+                        0
+N               50.000000
+Min              0.000001
+Max              1.657741
+Range            1.657740
+Mean             0.080234
+Median           0.006012
+Frist quartile   0.000512
+Third quartile   0.047302
+IR               0.046790
+Variance         0.063205
+Std              0.251405
+Symmetry         5.167310
+Kurtosis        28.430027
+-------------------------------------------------------------------------
+Function value
+                           0
+N               5.000000e+01
+Min             2.096351e-07
+Max             2.314329e-01
+Range           2.314327e-01
+Mean            1.293981e-02
+Median          1.168648e-03
+Frist quartile  1.014568e-04
+Third quartile  9.222485e-03
+IR              9.121028e-03
+Variance        1.301536e-03
+Std             3.607681e-02
+Symmetry        4.761500e+00
+Kurtosis        2.457014e+01
+-------------------------------------------------------------------------
+Iterations number
+                     0
+N                 50.0
+Min             2000.0
+Max             2000.0
+Range              0.0
+Mean            2000.0
+Median          2000.0
+Frist quartile  2000.0
+Third quartile  2000.0
+IR                 0.0
+Variance           0.0
+Std                0.0
+Symmetry           0.0
+Kurtosis          -3.0
+-------------------------------------------------------------------------
+Execution time
+                        0
+N               50.000000
+Min              0.830184
+Max              1.817699
+Range            0.987515
+Mean             1.132895
+Median           1.079103
+Frist quartile   0.938878
+Third quartile   1.268965
+IR               0.330088
+Variance         0.066570
+Std              0.258012
+Symmetry         1.048072
+Kurtosis         0.410559

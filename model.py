@@ -1,3 +1,10 @@
+#This library was slightly modified, added the function variogram_combination
+__author__    = "Connor Johnson"
+__url__    = "https://github.com/cjohnson318/geostatsmodels"
+__date__      = "2019"
+__copyright__ = "Copyright (C) 2019 Connor Johnson"
+__license__   = "GNU GPL Version 3.0"
+
 import numpy as np
 import variograms
 

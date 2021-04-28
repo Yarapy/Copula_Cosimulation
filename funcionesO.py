@@ -1,3 +1,8 @@
+__author__    = "Yarilis Gómez Martínez (yarilisgm@gmail.com)"
+__date__      = "2021"
+__copyright__ = "Copyright (C) 2021 Yarilis Gómez Martínez"
+__license__   = "GNU GPL Version 3.0"
+
 ##Modules##
 import numpy as np
 import variograms
@@ -17,15 +22,15 @@ def variogram_parameter(Data_Grid,sill,nugget_var,a_range, lag_number, var_model
     lag_tolerance=lag_size/2
     lags = np.linspace(lag_size*0.75, lag_size*lag_number-lag_size*0.25, lag_number)        
     #Teorical semivariogram#
-    if var_model=='spherical':
+    if var_model=='Spherical' or var_model=='Esférico':
         M=model.spherical
-    elif var_model=='gaussian':
+    elif var_model=='Gaussian' or var_model=='Gaussiano':
         M=model.gaussian
-    elif var_model=='exponential':
+    elif var_model=='Exponential' or var_model=='Exponencial':
         M=model.exponential 
-    elif var_model=='power':
+    elif var_model=='Power' or var_model=='Potencia':
         M=model.power
-    elif var_model=='linear':
+    elif var_model=='Linear' or var_model=='Lineal':
         M=model.linear
     selected_model=model.variogram_combination( model.nugget, M, (0,nugget_var), (a_range,sill-nugget_var), lags)
     svt=selected_model(lags)

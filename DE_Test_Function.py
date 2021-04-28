@@ -4,8 +4,8 @@
 Validation will be done for various functions.
 """
 __author__    = "Yarilis Gómez Martínez (yarilisgm@gmail.com)"
-__date__      = "2020-03-10"
-__copyright__ = "Copyright (C) 2020 Yarilis Gómez Martínez"
+__date__      = "2021"
+__copyright__ = "Copyright (C) 2021 Yarilis Gómez Martínez"
 __license__   = "GNU GPL Version 3.0"
 
 
@@ -18,7 +18,7 @@ import Grafics as graf
 ##Name of the files to save outputs##
 #Logger modes: 'w' erase previous file, 'a' appending to the end of the file
 output_namefile='DE_Test_Function'
-log_console = graf.Logger('Log_'+output_namefile+'.log', mode="w") 
+log_console = graf.Logger('Results/Log_'+output_namefile+'.log', mode="w") 
 
 
 ##Define the objective function##
@@ -287,5 +287,5 @@ print("Execution time")
 Tend_timeB.Table()
 
 #Save figures and log to files#
-graf.multipage('Figures_'+ output_namefile +'.pdf')
+graf.multipage('Results/Figures_'+ output_namefile +'.pdf')
 log_console.close()

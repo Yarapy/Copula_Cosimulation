@@ -1,7 +1,10 @@
 # Dual Annealing implementation.
-# Copyright (c) 2018 Sylvain Gubian <sylvain.gubian@pmi.com>,
-# Yang Xiang <yang.xiang@pmi.com>
-# Author: Sylvain Gubian, Yang Xiang, PMP S.A.
+# This module had minor modifications.
+
+__author__    = "ylvain Gubian, Yang Xiang, PMP S.A."
+__date__      = "2018"
+__copyright__ = "Copyright (c) 2018 Sylvain Gubian <sylvain.gubian@pmi.com> Yang Xiang <yang.xiang@pmi.com>"
+__license__   = "GNU GPL Version 3.0"
 
 """
 A Dual Annealing global optimization algorithm

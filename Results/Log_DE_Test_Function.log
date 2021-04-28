@@ -1,0 +1,245 @@
+----------------------------------------------------------------------------------
+Differential_evolution parameters:                                                
+----------------------------------------------------------------------------------
+Objective Function: Peaks, Ackley, Rastrigin and Rosenbrok Functions
+Bounds for the variables of the Ackley function = (-5, 5)
+Bounds for the variables of the Rastrigin and Rosenbrok function = (-5.12, 5.12)
+Strategy = best1bin
+Maximum number of generations  = 300
+Total population size = 30
+Relative tolerance = 1e-16
+Mutation constant = 1
+Recombination constant = 0.5
+Prints the evaluated func at every iteration. = False
+Minimization halted value = 1e-16
+Type of population initialization = latinhypercube
+Updating = deferred
+Workers = -1
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+Differential_evolution result:                                                    
+----------------------------------------------------------------------------------
+Result for the  Ackley function
+      fun: 0.0
+ message: 'callback function requested stop early by returning True'
+    nfev: 10440
+     nit: 173
+ success: False
+       x: array([0., 0.])
+----------------------------------------------------------------------------------
+Result for the  Rastrigin function
+      fun: 0.0
+ message: 'callback function requested stop early by returning True'
+    nfev: 5580
+     nit: 92
+ success: False
+       x: array([-2.49727464e-09, -1.06952371e-09])
+----------------------------------------------------------------------------------
+Result for the  Rosenbrok function
+      fun: 2.0767890128507587e-17
+ message: 'callback function requested stop early by returning True'
+    nfev: 10260
+     nit: 170
+ success: False
+       x: array([1.        , 1.00000001])
+----------------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Descriptive statistics                                                   
+-------------------------------------------------------------------------
+Ackley Function                                                          
+-------------------------------------------------------------------------
+Error
+                   0
+N               50.0
+Min              0.0
+Max              0.0
+Range            0.0
+Mean             0.0
+Median           0.0
+Frist quartile   0.0
+Third quartile   0.0
+IR               0.0
+Variance         0.0
+Std              0.0
+Symmetry         0.0
+Kurtosis        -3.0
+-------------------------------------------------------------------------
+Function value
+                   0
+N               50.0
+Min              0.0
+Max              0.0
+Range            0.0
+Mean             0.0
+Median           0.0
+Frist quartile   0.0
+Third quartile   0.0
+IR               0.0
+Variance         0.0
+Std              0.0
+Symmetry         0.0
+Kurtosis        -3.0
+-------------------------------------------------------------------------
+Iterations number
+                         0
+N                50.000000
+Min             159.000000
+Max             179.000000
+Range            20.000000
+Mean            169.920000
+Median          170.000000
+Frist quartile  167.000000
+Third quartile  173.000000
+IR                6.000000
+Variance         18.873600
+Std               4.344376
+Symmetry         -0.277945
+Kurtosis         -0.130978
+-------------------------------------------------------------------------
+Execution time
+                        0
+N               50.000000
+Min              1.253552
+Max              2.088221
+Range            0.834669
+Mean             1.513664
+Median           1.464336
+Frist quartile   1.365513
+Third quartile   1.677158
+IR               0.311645
+Variance         0.044496
+Std              0.210942
+Symmetry         1.002254
+Kurtosis        -0.012935
+-------------------------------------------------------------------------
+Rastrigin Function                                                       
+-------------------------------------------------------------------------
+Error
+                           0
+N               5.000000e+01
+Min             1.480039e-20
+Max             1.555920e-17
+Range           1.554440e-17
+Mean            6.952047e-18
+Median          6.952758e-18
+Frist quartile  3.216739e-18
+Third quartile  9.928216e-18
+IR              6.711477e-18
+Variance        1.851833e-35
+Std             4.303293e-18
+Symmetry        1.728955e-01
+Kurtosis       -9.112458e-01
+-------------------------------------------------------------------------
+Function value
+                   0
+N               50.0
+Min              0.0
+Max              0.0
+Range            0.0
+Mean             0.0
+Median           0.0
+Frist quartile   0.0
+Third quartile   0.0
+IR               0.0
+Variance         0.0
+Std              0.0
+Symmetry         0.0
+Kurtosis        -3.0
+-------------------------------------------------------------------------
+Iterations number
+                         0
+N                50.000000
+Min              84.000000
+Max             103.000000
+Range            19.000000
+Mean             94.020000
+Median           94.000000
+Frist quartile   90.250000
+Third quartile   97.750000
+IR                7.500000
+Variance         23.779600
+Std               4.876433
+Symmetry          0.049959
+Kurtosis         -0.702617
+-------------------------------------------------------------------------
+Execution time
+                        0
+N               50.000000
+Min              0.643952
+Max              1.611126
+Range            0.967175
+Mean             0.895674
+Median           0.859525
+Frist quartile   0.789250
+Third quartile   0.959440
+IR               0.170190
+Variance         0.025465
+Std              0.159578
+Symmetry         2.006442
+Kurtosis         6.387258
+-------------------------------------------------------------------------
+Rosenbrok Function                                                       
+-------------------------------------------------------------------------
+Error
+                           0
+N               5.000000e+01
+Min             3.745843e-19
+Max             5.473999e-11
+Range           5.473999e-11
+Mean            1.094929e-12
+Median          9.822807e-17
+Frist quartile  2.438297e-17
+Third quartile  2.357263e-16
+IR              2.113433e-16
+Variance        5.873047e-23
+Std             7.663581e-12
+Symmetry        6.857143e+00
+Kurtosis        4.502041e+01
+-------------------------------------------------------------------------
+Function value
+                           0
+N               5.000000e+01
+Min             1.459096e-18
+Max             5.315882e-10
+Range           5.315882e-10
+Mean            1.063181e-11
+Median          5.432927e-17
+Frist quartile  2.183837e-17
+Third quartile  7.438032e-17
+IR              5.254195e-17
+Variance        5.538685e-21
+Std             7.442234e-11
+Symmetry        6.857143e+00
+Kurtosis        4.502041e+01
+-------------------------------------------------------------------------
+Iterations number
+                         0
+N                50.000000
+Min             156.000000
+Max             300.000000
+Range           144.000000
+Mean            174.980000
+Median          174.000000
+Frist quartile  165.000000
+Third quartile  180.750000
+IR               15.750000
+Variance        406.219600
+Std              20.154890
+Symmetry          4.693643
+Kurtosis         26.724559
+-------------------------------------------------------------------------
+Execution time
+                        0
+N               50.000000
+Min              1.256491
+Max              2.712364
+Range            1.455873
+Mean             1.578086
+Median           1.478487
+Frist quartile   1.374625
+Third quartile   1.676309
+IR               0.301684
+Variance         0.083848
+Std              0.289565
+Symmetry         1.828757
+Kurtosis         3.999061

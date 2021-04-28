@@ -7,9 +7,9 @@ Estimate a multivariate distribution_http://openturns.github.io/openturns/master
 
 """
 __author__    = "Yarilis Gómez Martínez (yarilisgm@gmail.com)"
-__date__      = "2020-03-10"
-__copyright__ = "Copyright (C) 2020 Yarilis Gómez Martínez"
-__license__   = "BSD 3-Clause"
+__date__      = "2021"
+__copyright__ = "Copyright (C) 2021 Yarilis Gómez Martínez"
+__license__   = "GNU GPL Version 3.0"
 
 
 ##Modules##

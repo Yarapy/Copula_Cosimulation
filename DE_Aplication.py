@@ -17,9 +17,9 @@ Vol. 2. IEEE, 2002.
 
 """
 __author__    = "Yarilis Gómez Martínez (yarilisgm@gmail.com)"
-__date__      = "2020-03-10"
-__copyright__ = "Copyright (C) 2020 Yarilis Gómez Martínez"
-__license__   = "BSD 3-Clause"
+__date__      = "2021"
+__copyright__ = "Copyright (C) 2021 Yarilis Gómez Martínez"
+__license__   = "GNU GPL Version 3.0"
 
 ##Modules##
 import numpy as np
@@ -34,12 +34,12 @@ import ot_copula_conditional_YE as cond
 
 ##Name of the files to save outputs##
 #Logger modes: 'w' erase previous file, 'a' appending to the end of the file
-output_namefile='Dif_Evol_Noruego3_Ap'
+output_namefile='DE_Aplication_Noruego3'
 log_console = graf.Logger('Results/Log_'+output_namefile+'.log', mode="w") 
 
 ##Load data## 
-Data=lsd.Load_columns(6,[1,2,3,4,5,6],windowname='Select Data File',delimiter=',')
-Data_r=lsd.Load_columns(7,[1,2,3,4,5,6,7],windowname='Select Data File reference',delimiter=',')
+Data=lsd.Load_columns(6,[1,2,3,4,5,6],windowname='Select Data File',delimiter=',') #Data (Well 3 Noruego)
+Data_r=lsd.Load_columns(7,[1,2,3,4,5,6,7],windowname='Select Data File reference',delimiter=',') #Data reference (Well 2Noruego) 
 Data=Data[46:,:]
 X=Data[:,0]
 Z=Data[:,2]
@@ -51,7 +51,7 @@ Data_Grid=np.hstack((X.reshape(-1, 1),Z.reshape(-1, 1),Ip.reshape(-1, 1)))
 ##Variogram##
 #Input parameters#
 ##Well2Noruego 
-model='spherical';sill=0.00093;nugget_var=0.0004;a_range=110;amplitude=1;w0=[1,0.0001] 
+model='Spherical';sill=0.00093;nugget_var=0.0004;a_range=110;amplitude=0;w0=[1,0.001];U='(ft/s.g/cm3)';limit_Ip=(13981,26727);limit_Phit=(0.21,0.4);limit_error=(-0.13,0.13) 
 Nobs=len(Data_Grid)
 lag_number= 10
 lag_size=0 #If lag_size=0 it is calculated automatically.
@@ -76,8 +76,6 @@ copula_data=bivariate_distribution_data.getCopula()
 #Weights#
 w1=[1,1]
 w=[w0[0]*w1[0],w0[1]*w1[1]] 
-Phit_min=0.1
-Phit_max=0.4
 
 ##Objective function##
 F=fo.funcobj(w, Data_Grid,svt,lag_tolerance,lags, bivariate_distribution_data, trend_coef=pend_Phit)
@@ -116,10 +114,10 @@ print("----------------------------------------------------------------------")
 """-----------------------Method-Dif-Evol-----------------------------------"""
 
 ##Method input parameters##
-bounds=[(Phit_min,Phit_max) for i in range(Nobs)] #Variable search space
+bounds=[limit_Phit for i in range(Nobs)] #Variable search space
 #args
 strategy='best1bin' #Default strategy
-max_generations=3000
+max_generations=5 #Recommended max_generations=5000
 population_size=35 #Minimum is 5
 tolerance=1e-10
 mutation=0.5 #between (0,2)
@@ -133,7 +131,6 @@ def callback_epsilon(xk,convergence):
 #polish (The L-BFGS-B minimization method is used to polish the last member of the population.)
 #Create a random array wich preserve conditional distribution from Pared values  
 Phit_ini=[cond.ot_sample_conditional(bivariate_distribution_data,Data_Grid) for i in range(population_size)] 
-initial=Phit_ini#It can be 'latinhypercube' (default), 'random' or array list.
 initial=np.array(Phit_ini)#It can be 'latinhypercube' (default), 'random' or array list.
 #atol
 updating='deferred' #'deferred' or 'immediate'
@@ -193,10 +190,9 @@ print("----------------------------------------------------------------------")
 """------------------------------------End-Dif-Evol-------------------------"""
 
 ###Analysis of the result##
+#Variable#
 #Load saved data (only if necessary)#
 #Ps=lsd.Load_columns(3,[1,2,3],delimiter=' ',windowname='Select Results Data File')
-
-#Variable#
 Ps = np.hstack((Data_Grid[:,:2],ResultDEx.reshape(-1, 1)))
 Phits=Ps[:,2]
 Pared_s=np.hstack((Ip.reshape(-1, 1),Phits.reshape(-1, 1))) 
@@ -207,13 +203,14 @@ copula_s=bivariate_distribution_s.getCopula()
 #Save variable#
 lsd.Save_Data('Results/Result_'+output_namefile+'.dat',Ps, columns=["X", "Z", "Phits"])
 
+
 #Descriptive Univariate Statistics#
 T_Ip=graf.Stats_Univariate(Ip)
-T_Ip.histogram_boxplot(Ip,xlabel='Ip',marginal=marginal_data[0])
+T_Ip.histogram_boxplot(Ip,xlabel='Ip (ft/s.g/cm3)',marginal=marginal_data[0],limit_x=limit_Ip)
 T_Phit_r=graf.Stats_Univariate(Phit_r)
-T_Phit_r.histogram_boxplot(Phit_r,xlabel='Phit_reference',marginal=marginal_data[1])
+T_Phit_r.histogram_boxplot(Phit_r,xlabel='Phit_reference (v/v)',marginal=marginal_data[1],limit_x=limit_Phit)
 T_Phits=graf.Stats_Univariate(Phits)
-T_Phits.histogram_boxplot(Phits, xlabel='Phits',marginal=marginal_s[1])
+T_Phits.histogram_boxplot(Phits, xlabel='Phits (v/v)',marginal=marginal_s[1],limit_x=limit_Phit)
 
 print("----------------------------------------------------------------------")
 print("Descriptive Univariate Statistics:                                    ")
@@ -229,9 +226,8 @@ T_Phits.Table()
 print("----------------------------------------------------------------------")
 
 #Descriptive Bivariate Statistics#
-graf.Scater1(Ip_r,Phit_r,labelx='Ip_reference',labely='Phit_reference', color='black')
-graf.Scater1(Ip,Phits,labelx='Ip',labely='Phits', color='red')
-graf.pseudo_obs_scater1(marginal_data,Ip,Phits,labely1='u(Phits)', color='red')
+graf.Scater1(Ip_r,Phit_r,labelx='Ip_reference (ft/s.g/cm3)',labely='Phit_reference (v/v)', color='black')
+graf.pseudo_obs_scater1(marginal_data,Ip_r,Phit_r,labelx='v(Ip_reference) (ft/s.g/cm3)',labely1='u(Phit_reference) (v/v)')
 Ipr_Phitr=np.hstack((Ip_r.reshape(-1, 1),Phit_r.reshape(-1, 1))) 
 TB=graf.Stats_Bivariate(Ipr_Phitr)
 Ip_Phits=Pared_s
@@ -249,6 +245,10 @@ TBs.Table()
 print("----------------------------------------------------------------------")
 
 #Variogram calculation#
+#Variogram initial# 
+svt_smooth,_,_,_,lag_smooth=fo.variogram_parameter(Data_Grid,sill,nugget_var,a_range,lag_number*4,var_model=model,lag_size=lag_size/4)
+graf.Teorical_variogram(lag_smooth,svt_smooth,sill, a_range, var_model=model)
+
 #Variogram simulado#  
 svt_smooth,_,_,_,lag_smooth=fo.variogram_parameter(Data_Grid,sill,nugget_var,a_range,lag_number*4,var_model=model,lag_size=lag_size/4)
 vdatas = variograms.semivariogram(Ps, lags, lag_tolerance)
@@ -256,29 +256,34 @@ hs, svs = vdatas[0], vdatas[1]
 svs=svs-0.5*(hs*pend_Phit)**2 
 graf.Experimental_Variogram(lags, [svt_smooth, svs], sill, a_range,variance=T_Phits.variance_value,var_model=model,lags_svt=lag_smooth)
 
+#Porosity
+graf.Scater1(Ip,Phits,labelx='Ip (ft/s.g/cm3)',labely='Phits (v/v)', color='red')
+graf.pseudo_obs_scater1(marginal_data,Ip,Phits,labely1='u(Phits)', color='red')
+graf.pseudo_obs_scater1(marginal_data,Ip,Phits,labely1='u(Phits)', color='red')
+
 #Log_well
 Data_well=np.hstack((Data[:,2:],Phits.reshape(-1,1)))
 tracks=[[2,3],[1]]
-limits=[[(np.max(Data_well[:,2]).round(decimals=2),np.min(Data_well[:,2]).round(decimals=2)),(np.max(Data_well[:,3]).round(decimals=2),np.min(Data_well[:,3]).round(decimals=2))],[(np.max(Ip).round(decimals=2),np.min(Ip).round(decimals=2))]]
-labels=[['Rhob','Vp'],['Ip']]
+limits=[[(np.min(Data_well[:,2]).round(decimals=2),np.max(Data_well[:,2]).round(decimals=2)),(np.min(Data_well[:,3]).round(decimals=2),np.max(Data_well[:,3]).round(decimals=2))],[limit_Ip]]
+labels=[['Rhob (g/cm3)','Vp (ft/s)'],['Ip (ft/s.g/cm3)']]
 color=[['orange','gray'],['k']]
 graf.logview(Data_well,tracks,labels,title='Log well',limits=limits,colors=color)
 
 #Log_porosity
 Data_log=np.array([Z,Ip,Phits]).T
 tracks=[[1],[2]]
-limits=[(np.min(Ip).round(decimals=2),np.max(Ip).round(decimals=2))],[(np.min(Phits).round(decimals=2),np.max(Phits).round(decimals=2))]
-labels=[['Ip'],['Phits']]
+limits=[limit_Ip],[limit_Phit]
+labels=[['Ip (ft/s.g/cm3)'],['Phits (v/v)']]
 color=[['k'],['lime']]
 mean_log=[[T_Ip.mean],[T_Phits.mean]]
 median_log=[[T_Ip.median],[T_Phits.median]]
 graf.logview(Data_log,tracks,labels,title='Log of porosity',limits=limits,colors=color,mean=mean_log,median=median_log)
 
 #Marginal,copula and bivariate distributions plots
-graf.four_axis (marginal_data,Ip_r,Phit_r,copula_data, bivariate_distribution_data)
-graf.four_axis (marginal_s,Ip,Phits,copula_s, bivariate_distribution_s) 
-graf.cumul_four_axis (marginal_data,Ip_r,Phit_r,copula_data, bivariate_distribution_data) 
-graf.cumul_four_axis (marginal_s,Ip,Phits,copula_s, bivariate_distribution_s) 
+graf.four_axis (marginal_data,Ip_r,Phit_r,copula_data, bivariate_distribution_data,U)
+graf.four_axis (marginal_s,Ip,Phits,copula_s, bivariate_distribution_s,U) 
+graf.cumul_four_axis (marginal_data,Ip_r,Phit_r,copula_data, bivariate_distribution_data,U) 
+graf.cumul_four_axis (marginal_s,Ip,Phits,copula_s, bivariate_distribution_s,U) 
 
 print("----------------------------------------------------------------------")
 print("Bivariate Distributions from DATA:                                    ")
@@ -297,15 +302,15 @@ print("----------------------------------------------------------------------")
 #Conditional_PDF#
 conditioned_pdf_s=cond.ot_compute_conditional(Phits,bivariate_distribution_s,Data_Grid) 
 conditioned_pdf=cond.ot_compute_conditional(Phits,bivariate_distribution_data,Data_Grid)
-graf.Scater(Phits,conditioned_pdf_s,conditioned_pdf)
+graf.Scater(Phits,conditioned_pdf_s,conditioned_pdf,limit_x=limit_Phit)
 
 #Conditional_CDF#
 conditioned_cdf_s=cond.ot_compute_conditional_cdf(Phits,bivariate_distribution_s,Data_Grid) 
 conditioned_cdf=cond.ot_compute_conditional_cdf(Phits,bivariate_distribution_data,Data_Grid)
-graf.Scater(Phits,conditioned_cdf_s,conditioned_cdf, labely1='conditioned_cdf_s', labely2='conditioned_cdf')
+graf.Scater(Phits,conditioned_cdf_s,conditioned_cdf, labely1='cdf_conditional_s', labely2='cdf_conditional',limit_x=limit_Phit)
 
 #Empirical CDF
-graf.emprical_CDF([Phits],[marginal_data[1]],colors=['r','k'])
+graf.emprical_CDF([Phits],[marginal_data[1]],colors=['r','k'],limit_x=limit_Phit)
 
 #Save figures and log to files#
 graf.multipage('Results/Figures_'+ output_namefile +'.pdf')

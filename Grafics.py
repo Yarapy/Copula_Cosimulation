@@ -1,3 +1,8 @@
+__author__    = "Yarilis Gómez Martínez (yarilisgm@gmail.com)"
+__date__      = "2021"
+__copyright__ = "Copyright (C) 2021 Yarilis Gómez Martínez"
+__license__   = "GNU GPL Version 3.0"
+
 ##Modules##
 import sys, os
 import numpy as np
@@ -11,7 +16,7 @@ import openturns.viewer as otv
 import ot_copula_conditional_YE as cond
 
 Global_resolution=1.1
-Lenguage="ES"#"EN"
+Lenguage="EN"#"ES"
 
 
 def multipage(filename, figs=None, dpi=300):
@@ -111,7 +116,7 @@ class Stats_Univariate(object):
         Table=pd.DataFrame(Stadistic, Stadistic_names)
         print(Table)
 
-    def histogram_boxplot(self,Var,xlabel="Porosidad", ylabel="Frecuencia",marginal=None,nbins=10,limit_x=None):
+    def histogram_boxplot(self,Var,xlabel="Porosity", ylabel="Frequency ",marginal=None,nbins=10,limit_x=None):
         if limit_x==None:
             limit_x=(self.min_value,self.max_value)
         #Histogram and boxplot
@@ -455,7 +460,7 @@ def cumul_four_axis(marginal,Var1, Var2,copula, bivariate_distribution,U):
     fig.tight_layout(rect=[0, 0, 1, 0.95]) 
     
    
-def Teorical_variogram(lags,svt,sill, a_range, var_model='Esférico',ax=None):
+def Teorical_variogram(lags,svt,sill, a_range, var_model='spherical',ax=None):
     if ax==None:
         fig, ax = plt.subplots(1,1,figsize=(6*Global_resolution,5*Global_resolution))
     #Plot_teorical_vaiogram#  
@@ -469,7 +474,7 @@ def Teorical_variogram(lags,svt,sill, a_range, var_model='Esférico',ax=None):
     ax.set_ylabel("Semivariogram")
 
   
-def Experimental_Variogram(lags,sv_list, sill, a_range, variance=0,var_model='Esférico',color_svt='red',sv_plot=1,lags_svt=[],ax=None):
+def Experimental_Variogram(lags,sv_list, sill, a_range, variance=0,var_model='spherical',color_svt='red',sv_plot=1,lags_svt=[],ax=None):
     if ax==None:
         fig, ax = plt.subplots(1,1,figsize=(6*Global_resolution,5*Global_resolution))
     #Simulated experimental variogram#
@@ -505,7 +510,7 @@ def Experimental_Variogram(lags,sv_list, sill, a_range, variance=0,var_model='Es
         ax.set_ylabel("Semivariograma")
     
     
-def Scater(x, y1, y2,options='scater',ax=None,labelx='Phit (v/v)',labely1='pdf_condicional_s',labely2= 'pdf_condicional', Condition=[],label_Condition='condicionamiento', color=['black','red'],limit_x=None):
+def Scater(x, y1, y2,options='scater',ax=None,labelx='Phit (v/v)',labely1='pdf_conditional_s',labely2= 'pdf_conditional', Condition=[],label_Condition='conditioning', color=['black','red'],limit_x=None):
     if limit_x==None:
         limit_x=(min(x),max(x))
     #extra_space=(limit_x[1]-limit_x[0])/20
@@ -545,7 +550,7 @@ def pseudo_obs_scater(marginal1,marginal2,Var1,Var2,Var3,ax=None,labely1='u (Phi
     plt.legend()
 
   
-def Scater1(x, y,labelx='Phit',labely='Ip', color='orange',Condition=[],label_Condition='condicionamiento',ax=None,limit_x=None,limit_y=None,reference=False):
+def Scater1(x, y,labelx='Phit',labely='Ip', color='orange',Condition=[],label_Condition='conditioning',ax=None,limit_x=None,limit_y=None,reference=False):
     if ax==None:
         fig, ax = plt.subplots(1,1,figsize=(Global_resolution*5,Global_resolution*5))
     if limit_x==None:
@@ -588,7 +593,7 @@ def compute_conditional_cdf(val,bivariate_distribution,condition):
         conditioned_cdf[i]=cdfval 
     return conditioned_cdf
     
-def logview(Data,tracks,labels,title='Pozo',limits=[],colors=[],mean=[],median=[],Condition=[]):
+def logview(Data,tracks,labels,title='Well',limits=[],colors=[],mean=[],median=[],Condition=[]):
     #tracks has the form [[1],[1,...,n],[2]] where the numbers are the columns
     #colors and limits should have the same form as tracks
     #each limit in limits is a tuple (a,b)
@@ -645,7 +650,7 @@ def logview(Data,tracks,labels,title='Pozo',limits=[],colors=[],mean=[],median=[
                 renewax.spines['top'].set_position(('outward', spin_position))
                 spin_position=spin_position+20
                 renewax.spines['top'].set_color(c)
-                renewax.set_xlabel('mediana',color=c)
+                renewax.set_xlabel('median',color=c)
                 # renewax.set_xlabel('median=%f'%median[n][i],color='blue')#ESTA LINEA MUESTRA EL VALOR
                 renewax.set_xticks([])
                 renewax.set_xlim(l2)
@@ -658,7 +663,7 @@ def logview(Data,tracks,labels,title='Pozo',limits=[],colors=[],mean=[],median=[
                 renewax.spines['top'].set_position(('outward', spin_position))
                 spin_position=spin_position+20
                 renewax.spines['top'].set_color(c)
-                renewax.set_xlabel('media',color=c)
+                renewax.set_xlabel('mean',color=c)
                 # renewax.set_xlabel('median=%f'%median[n][i],color='blue')#ESTA LINEA MUESTRA EL VALOR
                 renewax.set_xticks([])
                 renewax.set_xlim(l2)
@@ -667,7 +672,7 @@ def logview(Data,tracks,labels,title='Pozo',limits=[],colors=[],mean=[],median=[
     fig.tight_layout(rect=[0, 0, 1, 0.95]) 
    
     
-def emprical_CDF(Vars,marginals,ax=None,colors=[],labelx='Phit (v/v)',labely1=['Phits empírica'],labely2=['Phit marginal'], limit_x=None):
+def emprical_CDF(Vars,marginals,ax=None,colors=[],labelx='Phit (v/v)',labely1=['Phits empirical'],labely2=['Phit marginal'], limit_x=None):
     if ax==None:
         fig, ax = plt.subplots(1,1,figsize=(Global_resolution*5,Global_resolution*5))
     if limit_x==None:
