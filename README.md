@@ -39,7 +39,8 @@ Una biblioteca de Python para implementar un método de co-simulación con cópu
 
 Title: Métodos metaheurísticos de optimización global para la cosimulación estocástica espacial basada en cópulas
 
-Author: Yarilis Gómez Martínez
+Author: Yarilis Gómez Martínez;
+        Ernesto Iglesias Rodríguez
 
 Date: 2020
 
